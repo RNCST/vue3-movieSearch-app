@@ -1,0 +1,27 @@
+$primary:#FDC000;
+// 위치가 중요하다.  아래의 import 영역 밑에 선언하는경우 이미 default로 
+// $primary의 색상이 설정되었기때문에 색을 제어해줄수없다. 
+$theme-colors: (
+  "primary": orange,
+  "secondary": red,
+  "success": red,
+  "info": red,
+  "warning": red,
+  "danger": red,
+  "light": red,
+  "dark": red,
+);
+// $primary나 $secondary의 변수를 사용하려는 경우 scss/variables 밑에서 설정해줘야한다. 
+
+
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+// Optional Bootstrap components here
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+// etc
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
