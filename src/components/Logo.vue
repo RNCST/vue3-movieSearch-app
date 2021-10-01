@@ -11,7 +11,7 @@
 @import "~/scss/main";
 .logo{
   font-family: "Signika", sans-serif;
-  font-size: 30px;
+  font-size: 24px;
   color: $black;
   text-decoration: none;
   &:hover{
