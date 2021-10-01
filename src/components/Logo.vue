@@ -1,0 +1,25 @@
+<template>
+  <RouterLink
+    to="/"
+    class="logo">
+    <span>OMDb</span>API.COM
+  </RouterLink>
+</template>
+
+
+<style lang="scss" scoped>
+@import "~/scss/main";
+.logo{
+  font-family: "Signika", sans-serif;
+  font-size: 30px;
+  color: $black;
+  text-decoration: none;
+  &:hover{
+    color:$black;
+  }
+  span {
+    color: $primary;
+  }
+}
+
+</style>

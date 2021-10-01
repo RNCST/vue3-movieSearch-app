@@ -1,8 +1,10 @@
-$primary:#FDC000;
+
+
+$primary:#4DBA87;
 // 위치가 중요하다.  아래의 import 영역 밑에 선언하는경우 이미 default로 
 // $primary의 색상이 설정되었기때문에 색을 제어해줄수없다. 
 $theme-colors: (
-  "primary": orange,
+  "primary": #4DBA87,
   "secondary": red,
   "success": red,
   "info": red,

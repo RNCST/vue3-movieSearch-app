@@ -1,4 +1,6 @@
 <template>
+  <Logo />
+  <Header />
   <RouterView />
   <!-- 
     main.js에 router를 사용하게되면 
@@ -8,8 +10,12 @@
 </template>
 
 <script>
+import Header from '~/components/Header'
+
 export default {
-  
+  components:{
+    Header,
+  }
 }
 </script>
 
