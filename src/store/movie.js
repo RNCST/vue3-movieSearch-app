@@ -1,29 +1,61 @@
+import axios from 'axios'
+import _uniqBy from 'lodash/uniqBy'
+
 export default {
   namespaced: true,
   // movie.js를 module화해서 사용할 수 있다.
   state: () => ({
-    movies: []
+    movies: [],
+    message: '',
+    loading: false
   }),
   // data,
-  getters: {
-    movieIds(state) {
-      return state.movies.map(m => m.imdbID)
-    }
-  },
-  // computed(계산이 된 상태)
   //mutations actions는 method로 보면된다.
+  getters:{},
   mutations:{
     resetMovies(state){
       state.movies = [];
-    }
+    },
+    updateState(state, payload) {
+      Object.keys(payload).forEach(key => {
+        // => ['movies','message','loading']
+        // => key= movies한바퀴 message한바퀴 loading 한바퀴
+        // state.movies = payload.movies
+        // state.message = payload.message
+        // state.loading = payload.loading
+        // =>
+        state[key] = payload[key]
+      })
+    },
   },
   // movie.js state의 정보값을 mutations를 통해서만 조작할 수 잇다.
   actions: {
-    searchMovies({state, getters, commit}) {
-    // searchMovies(context) {
-      state
-      getters
-      commit
+    async searchMovies({commit, state}, payload) {
+      const { title, type, number, year } = payload
+      const OMDB_API_KEY = '7035c60c';
+
+      const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`)
+      const { Search, totalResults } = res.data
+      commit('updateState', {
+        movies: _uniqBy(Search,'imdbID'),
+        // 고유화
+      })
+
+      const total = parseInt(totalResults,10)
+      const pageLength = Math.ceil(total / 10)
+      // 추가 요청
+      if(pageLength > 1) {
+        for( let page = 2 ; page <=pageLength ; page++){
+          if (page > number / 10) break
+          const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`)
+          const { Search } = res.data
+          commit ('updateState', {
+            movies: [...state.movies, ..._uniqBy(Search,'imdbID'),]
+
+          })
+
+        }
+      }
     }
   },
   // mutations 그외의 method를 처리하면된다.

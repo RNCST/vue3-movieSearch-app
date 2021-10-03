@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data() {
@@ -67,9 +66,16 @@ export default {
   },
   methods:{
     async apply() {
-      const OMDB_API_KEY = '7035c60c';
-      const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${this.title}&type=${this.type}&y=${this.year}&page=1`)
-      console.log(res);
+      this.$store.dispatch('movie/searchMovies', {
+        // Store의 Mutation을 실행할떄는 .commit() 메소드를 Actios를 실행할떄는 dispatch()메소드를 사용한다.
+        // 이 movie 라는 이름은 store/index.js에 정의한 모듈의 이름을 써야한다.
+        title:this.title,
+        type:this.type,
+        number: this.number,
+        year: this.year
+        // 데이터들을 movie store에 있는 actions의 payload라는 객체의 인수로 넘겨준다.,
+      })
+      
 
     },
   }
