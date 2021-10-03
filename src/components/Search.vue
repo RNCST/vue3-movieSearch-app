@@ -67,7 +67,7 @@ export default {
   methods:{
     async apply() {
       this.$store.dispatch('movie/searchMovies', {
-        // Store의 Mutation을 실행할떄는 .commit() 메소드를 Actios를 실행할떄는 dispatch()메소드를 사용한다.
+        // Store의 Mutation을 실행할떄는 .commit() 메소드를 Actions를 실행할떄는 dispatch()메소드를 사용한다.
         // 이 movie 라는 이름은 store/index.js에 정의한 모듈의 이름을 써야한다.
         title:this.title,
         type:this.type,
@@ -75,8 +75,6 @@ export default {
         year: this.year
         // 데이터들을 movie store에 있는 actions의 payload라는 객체의 인수로 넘겨준다.,
       })
-      
-
     },
   }
 };
