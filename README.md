@@ -3,9 +3,9 @@
 
 ## 🎯 Links (DEMO / Github Repository)
 
-[DEMO](https://github.com/RNCST/vue3-movieSearch-app)
+[DEMO](https://rncstvue3movieapp.netlify.app/)
 
-[Repository](https://rncstvue3movieapp.netlify.app/)
+[Repository](https://github.com/RNCST/vue3-movieSearch-app)
 
 ## 📖 What I USE 
 
