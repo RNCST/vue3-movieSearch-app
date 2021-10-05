@@ -6,7 +6,7 @@ export default {
   // movie.js를 module화해서 사용할 수 있다.
   state: () => ({
     movies: [],
-    message: '',
+    message: 'Search for the movie title!',
     loading: false
   }),
   // data,
@@ -31,6 +31,16 @@ export default {
   // movie.js state의 정보값을 mutations를 통해서만 조작할 수 잇다.
   actions: {
     async searchMovies({ commit, state }, payload) {
+      if(state.loading) return
+        // searchMovies의 중복 실행 방지
+      
+
+      commit('updateState', {
+        message: '',
+        loading: true,
+      })
+      // 검색실행하면 search for the movie title을 공란으로 초기화
+      
       try {
         const res = await _fetchMovie({
           ...payload,
@@ -61,6 +71,10 @@ export default {
         commit('updateState', {
           movies: [],
           message: message
+        })
+      } finally {
+        commit('updateState', {
+          loading: false,
         })
       }
     }
