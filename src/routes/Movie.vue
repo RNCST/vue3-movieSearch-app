@@ -12,9 +12,15 @@
       </div>
     </div>
   </div>
+  <Loader 
+    :size="3" 
+    :z-index="9"
+    fixed />
+    <!-- :fixed="true" 와 같다  -->
 </template>
 
 <script>
+import Loader from '~/components/Loader'
 export default {
   created() {
     console.log(this.$route);
@@ -22,6 +28,9 @@ export default {
       id: 'this.$route.params.movieId'
       // movie/tt12345 ==> movieId = tt12345 ==> id = tt12345
     })
+  },
+  components: {
+    Loader
   }
 }
 </script>
