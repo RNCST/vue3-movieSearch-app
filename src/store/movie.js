@@ -36,15 +36,11 @@ export default {
           ...payload,
           page: 1
         })
-        console.log(res);
-        console.log(typeof res);
         const { Search, totalResults } = res.data
-        console.log(Search);
         commit('updateState', {
           movies: _uniqBy(Search, 'imdbID'),
           // 고유화
         })
-  
         const total = parseInt(totalResults, 10)
         const pageLength = Math.ceil(total / 10)
         // 추가 요청

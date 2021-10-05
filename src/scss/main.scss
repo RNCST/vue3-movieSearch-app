@@ -13,6 +13,14 @@ $theme-colors: (
   "light": red,
   "dark": red,
 );
+
+$container-max-widths: (
+  sm: 540px,
+  md: 704px,
+  lg: 924px,
+  xl: 1140px,
+  xxl: 1364px
+);
 // $primary나 $secondary의 변수를 사용하려는 경우 scss/variables 밑에서 설정해줘야한다. 
 
 

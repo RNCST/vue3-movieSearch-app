@@ -25,12 +25,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 @import "~/scss/main";
 
 .movie{
   $width: 200px;
   width: $width;
-  height: $width * 3 / 2;
+  height: math.div($width * 3, 2);
   margin: 10px;
   border-radius: 4px;
   background-color: $gray-400;
