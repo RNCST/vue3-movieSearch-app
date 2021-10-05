@@ -80,7 +80,7 @@ export default {
       })
       try {
         const res = await _fetchMovie(payload)
-        
+        console.log(res);
         //payload에는 id만 담겨있다.
         commit('updateState', {
           theMovie: res.data
@@ -116,7 +116,6 @@ function _fetchMovie(payload) {
         if (res.data.Error) {
           reject(res.data.Error)
         }
-        console.log('res', res); 
         resolve(res)
       })
       .catch((err) => {
