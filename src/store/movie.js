@@ -19,12 +19,6 @@ export default {
     },
     updateState(state, payload) {
       Object.keys(payload).forEach(key => {
-        // => ['movies','message','loading']
-        // => key= movies한바퀴 message한바퀴 loading 한바퀴
-        // state.movies = payload.movies
-        // state.message = payload.message
-        // state.loading = payload.loading
-        // =>
         state[key] = payload[key]
       })
     },
@@ -78,7 +72,7 @@ export default {
       }
     },
     async searchMovieWithId({state,commit}, payload) {
-      if( state.loading) return
+      if( state.loading ) return
       commit('updateState', {
         theMovie: {},
         // 새로검색할떄 이미검색된내용이 노출이 안되게
@@ -86,6 +80,7 @@ export default {
       })
       try {
         const res = await _fetchMovie(payload)
+        
         //payload에는 id만 담겨있다.
         commit('updateState', {
           theMovie: res.data
@@ -121,6 +116,7 @@ function _fetchMovie(payload) {
         if (res.data.Error) {
           reject(res.data.Error)
         }
+        console.log('res', res); 
         resolve(res)
       })
       .catch((err) => {

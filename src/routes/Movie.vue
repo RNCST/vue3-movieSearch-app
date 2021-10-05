@@ -1,43 +1,93 @@
 <template>
   <div class="container">
-    <div class="skeletons">
-      <div class="skeleton poster"></div>
+    <template v-if="loading">
+      <div class="skeletons">
+        <div class="skeleton poster"></div>
+        <div class="specs">
+          <div class="skeleton title"></div>
+          <div class="skeleton spec"></div>
+          <div class="skeleton plot"></div>
+          <div class="skeleton etc"></div>
+          <div class="skeleton etc"></div>
+          <div class="skeleton etc"></div>
+        </div>
+      </div>
+      <Loader
+        :size="3"
+        :z-index="9"
+        fixed />
+      <!-- :fixed="true" 와 같다  -->
+    </template>
+    <div
+      v-else
+      class="movie-details">
+      <div
+        :style="{ backgroundImage: `url(${theMovie.Poster})` }"
+        class="poster"></div>
       <div class="specs">
-        <div class="skeleton title"></div>
-        <div class="skeleton spec"></div>
-        <div class="skeleton plot"></div>
-        <div class="skeleton etc"></div>
-        <div class="skeleton etc"></div>
-        <div class="skeleton etc"></div>
+        <div class="title">
+          {{ theMovie.Title }}
+        </div>
+        <div class="labels">
+          <span>{{ theMovie.Released }}</span>
+          <span>{{ theMovie.Runtime }} </span>
+          <span>{{ theMovie.Country }}</span>
+        </div>
+        <div class="plot">
+          {{ theMovie.Plot }}
+        </div>
+        <div class="ratings">
+          <h3>Ratings</h3>
+        </div>
+        <div>
+          <h3>Actors</h3>
+          {{ theMovie.Actors }}
+        </div>
+        <div>
+          <h3>Director</h3>
+          {{ theMovie.Director }}
+        </div>
+        <div>
+          <h3>Production</h3>
+          {{ theMovie.Production }}
+        </div>
+        <div>
+          <h3>Genre</h3>
+          {{ theMovie.Genre }}
+        </div>
       </div>
     </div>
   </div>
-  <Loader 
-    :size="3" 
-    :z-index="9"
-    fixed />
-    <!-- :fixed="true" 와 같다  -->
 </template>
 
 <script>
-import Loader from '~/components/Loader'
+import Loader from "~/components/Loader";
 export default {
   created() {
-    console.log(this.$route);
-    this.$store.dispatch('movie/searchMovieWithId', {
-      id: 'this.$route.params.movieId'
-      // movie/tt12345 ==> movieId = tt12345 ==> id = tt12345
-    })
+    this.$store.dispatch("movie/searchMovieWithId", {
+      id: this.$route.params.movieId,
+      // movie/tt12345 ==>
+      //movieId = tt12345 ==>
+      //id = tt12345
+    });
   },
   components: {
-    Loader
-  }
-}
+    Loader,
+  },
+  computed: {
+    theMovie() {
+      return this.$store.state.movie.theMovie;
+    },
+    loading() {
+      return this.$store.state.movie.loading;
+    },
+  },
+};
 </script>
 
 
 <style lang="scss" scoped>
-@import '~/scss/main';
+@import "~/scss/main";
 
 .container {
   padding-top: 40px;
@@ -56,30 +106,78 @@ export default {
     flex-grow: 1;
     // 증가너비를 최대한 사용
   }
-  .skeleton{
+  .skeleton {
     border-radius: 10px;
     background-color: $gray-200;
 
-    &.title{
+    &.title {
       width: 80%;
       height: 70px;
     }
-    &.plot{
+    &.plot {
       width: 60%;
       height: 30px;
-      margin-top: 20px
+      margin-top: 20px;
     }
     &.plot {
       width: 100%;
       height: 250px;
-      margin-top: 20px
+      margin-top: 20px;
     }
-    &.etc{
+    &.etc {
       width: 50%;
       height: 50px;
-      margin-top: 20px
+      margin-top: 20px;
     }
   }
 }
-
+.movie-details {
+  display: flex;
+  color: $gray-600;
+  .poster {
+    flex-shrink: 0;
+    width: 500px;
+    height: 500px * 3/2;
+    margin-right: 70px;
+    border-radius: 10px;
+    background-color: $gray-200;
+    background-size: cover;
+    background-position: center;
+  }
+  .specs {
+    flex-grow: 1;
+    .title {
+      color: $black;
+      font-family: "Signika", sans-serif;
+      font-size: 70px;
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+    .labels {
+      color: $primary;
+      font-weight: 700;
+      span {
+        // http://www.evotech.net/blog/2007/04/named-html-entities-in-numeric-order/
+        &::after {
+          content: "\00b7";
+          margin: 0 6px;
+        }
+        &:last-child::after{
+          display:none;
+        }
+      }
+    }
+    .plot {
+      margin-top: 40px;
+    }
+    .ratings {
+    }
+    h3 {
+      margin: 24px 0 6px;
+      color: $black;
+      font-family: "Signika", sans-serif;
+      font-size: 20px;
+    }
+  }
+}
 </style>
