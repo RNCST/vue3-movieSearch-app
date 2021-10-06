@@ -2,6 +2,10 @@
   <div 
     :style="{backgroundImage: `url(${movie.Poster})`}"
     class="movie">
+    <Loader
+      v-if="imageLoading"
+      :size="1.5"
+      absolute />
     <div class="info">
       <div class="year">
         {{ movie.Year }}
@@ -14,11 +18,35 @@
 </template>
 
 <script>
+import Loader from '~/components/Loader'
 export default {
+  components: {
+    Loader
+  },
   props: {
     movie: {
       type:Object,
       default : () => ({})
+    }
+  },
+  data() {
+    return {
+      imageLoading: true,
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      // const img = document.createElement('img')
+      // img.src=this.movie.Poaster
+      // img.addEventListener('load',() => {
+      //   this.imageLoading = false
+      // }) => loadImage plugin으로 이사감..
+      // arrow function이 아닌 일반 function 을 쓰는경우 this.imageLoading에 접근할 수 없다.
+      await this.$loadImage(this.movie.Poster)
+      this.imageLoading = false
     }
   }
 }

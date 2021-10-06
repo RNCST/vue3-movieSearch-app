@@ -23,7 +23,11 @@
       class="movie-details">
       <div
         :style="{ backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})` }"
-        class="poster"></div>
+        class="poster">
+        <Loader 
+          v-if="imageLoading"
+          absolute />
+      </div>
       <div class="specs">
         <div class="title">
           {{ theMovie.Title }}
@@ -96,7 +100,19 @@ export default {
   },
   methods: {
     requestDiffSizeImage(url, size = 700){
-      return url.replace('SX300',`SX${size}`)
+      const src = url.replace('SX300',`SX${size}`)
+      this.$loadImage(src)
+      .then(() => {
+        this.imageLoading = false
+      })
+      // async await을 쓰게되면 await 뒤내용이 끝날때까지 기다렸다가 return src가
+      // 시행이된다. 
+      return src
+    },
+  },
+  data() {
+    return {
+     imageLoading:true
     }
   }
   
@@ -105,6 +121,7 @@ export default {
 
 
 <style lang="scss" scoped>
+@use "sass:math";
 @import "~/scss/main";
 
 .container {
@@ -115,7 +132,7 @@ export default {
   display: flex;
   .poster {
     width: 500px;
-    height: 500px * 3/ 2;
+    height: math.div(500px * 3, 2);
     margin-right: 70px;
     flex-shrink: 0;
     // 감소너비를 사용하지않음.
@@ -153,9 +170,10 @@ export default {
   display: flex;
   color: $gray-600;
   .poster {
+    position: relative;
     flex-shrink: 0;
     width: 500px;
-    height: 500px * 3/2;
+    height: math.div(500px * 3, 2);
     margin-right: 70px;
     border-radius: 10px;
     background-color: $gray-200;
