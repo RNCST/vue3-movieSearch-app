@@ -11,7 +11,9 @@
         <RouterLink
           :to="nav.href" 
           active-class="active"
+          :class=" {active: isMatch(nav.path)}"
           class="nav-link">
+          <!--  -->
           <!-- bootstrap에서 router-active가 아닌 active 클래스조작이 들어가야
           스타일 조작이 가능하다. -->
           {{ nav.name }}
@@ -36,14 +38,22 @@ export default {
         },
         {
           name: 'Movie',
-          href: '/movie/tt0848228'
+          href: '/movie/',
+          path: /^\/movie/ // /movie로 시작하는 경로인경우
         },
         {
           name: 'About',
           href: '/about'
         }
-
       ]
+    }
+  },
+  methods: {
+    isMatch(path) {
+      // console.log(this.$route);
+      // console.log('path',path);
+      if(!path) return false
+      else return path.test(this.$route.fullPath)
     }
   }
 }
