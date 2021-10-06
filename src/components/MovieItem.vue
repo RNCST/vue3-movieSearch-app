@@ -39,13 +39,18 @@ export default {
   },
   methods: {
     async init() {
+      const poster = this.movie.Poster
       // const img = document.createElement('img')
       // img.src=this.movie.Poaster
       // img.addEventListener('load',() => {
       //   this.imageLoading = false
       // }) => loadImage plugin으로 이사감..
       // arrow function이 아닌 일반 function 을 쓰는경우 this.imageLoading에 접근할 수 없다.
-      await this.$loadImage(this.movie.Poster)
+      if(!poster || poster === 'N/A'){
+        this.imageLoading=false
+      }else {
+        await this.$loadImage(poster)
+      }
       this.imageLoading = false
     }
   }

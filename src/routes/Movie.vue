@@ -100,7 +100,11 @@ export default {
   },
   methods: {
     requestDiffSizeImage(url, size = 700){
-      const src = url.replace('SX300',`SX${size}`)
+      if(!url || url ==='N/A' ){
+        this.imageLoading = false
+        return ''
+      }else {
+        const src = url.replace('SX300',`SX${size}`)
       this.$loadImage(src)
       .then(() => {
         this.imageLoading = false
@@ -108,6 +112,8 @@ export default {
       // async await을 쓰게되면 await 뒤내용이 끝날때까지 기다렸다가 return src가
       // 시행이된다. 
       return src
+      }
+      
     },
   },
   data() {
