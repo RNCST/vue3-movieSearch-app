@@ -82,6 +82,8 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "~/scss/main";
+
 .container {
   > * {
     margin-right: 10px;
@@ -106,6 +108,23 @@ export default {
     flex-shrink: 0; // flex가 강제로 너비를 조작하는것을 방지
     height: 50px;
     font-weight: 700;
+  }
+  @include media-breakpoint-down(lg){
+    display: block;
+    input {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .selects {
+      margin-right:0;
+      margin-bottom:10px;
+      select{
+        width:100%;
+      }
+    }
+    .btn {
+      width: 100%;
+    }
   }
 }
 </style>
