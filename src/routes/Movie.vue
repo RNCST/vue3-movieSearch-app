@@ -127,9 +127,6 @@ export default {
 
 
 <style lang="scss" scoped>
-@use "sass:math";
-@import "~/scss/main";
-
 .container {
   padding-top: 40px;
 }
@@ -138,7 +135,7 @@ export default {
   display: flex;
   .poster {
     width: 500px;
-    height: math.div(500px * 3, 2);
+    height: 500px * 3, 2;
     margin-right: 70px;
     flex-shrink: 0;
     // 감소너비를 사용하지않음.
@@ -179,7 +176,7 @@ export default {
     position: relative;
     flex-shrink: 0;
     width: 500px;
-    height: math.div(500px * 3, 2);
+    height: 500px * 3, 2;
     margin-right: 70px;
     border-radius: 10px;
     background-color: $gray-200;
