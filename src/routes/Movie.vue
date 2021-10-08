@@ -78,27 +78,32 @@
 
 <script>
 import Loader from "~/components/Loader";
+import {mapState, mapActions} from "vuex";
 export default {
   created() {
-    this.$store.dispatch("movie/searchMovieWithId", {
+    // this.$store.dispatch("movie/searchMovieWithId", {
+    //   id: this.$route.params.movieId,
+    //   // movie/tt12345 ==>
+    //   //movieId = tt12345 ==>
+    //   //id = tt12345
+    // });
+    this.searchMovieWithId({
       id: this.$route.params.movieId,
-      // movie/tt12345 ==>
-      //movieId = tt12345 ==>
-      //id = tt12345
-    });
+    })
   },
   components: {
     Loader,
   },
   computed: {
-    theMovie() {
-      return this.$store.state.movie.theMovie;
-    },
-    loading() {
-      return this.$store.state.movie.loading;
-    },
+    ...mapState('movie',[
+      'theMovie',
+      'loading'
+    ])
   },
   methods: {
+    ...mapActions('movie', [
+      'searchMovieWithId'
+    ]),
     requestDiffSizeImage(url, size = 700){
       if(!url || url ==='N/A' ){
         this.imageLoading = false
