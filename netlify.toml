@@ -1,2 +1,2 @@
-[build]
-  function = "net_functions"
+[functions]
+  directory = "net_functions"
