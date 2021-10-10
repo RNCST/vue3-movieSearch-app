@@ -238,7 +238,7 @@ export default {
       margin-right: 40px;
     }
   }
-  @include media-breakpoint-down(lb){
+  @include media-breakpoint-down(lg){
     display:block;
     .poster{
       margin-bottom:40px;

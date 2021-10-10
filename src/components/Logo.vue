@@ -8,7 +8,6 @@
 
 
 <style lang="scss" scoped>
-@import "~/scss/main";
 .logo{
   font-family: "Signika", sans-serif;
   font-size: 24px;
