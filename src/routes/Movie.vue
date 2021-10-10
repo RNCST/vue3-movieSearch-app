@@ -78,32 +78,27 @@
 
 <script>
 import Loader from "~/components/Loader";
-import {mapState, mapActions} from "vuex";
 export default {
   created() {
-    // this.$store.dispatch("movie/searchMovieWithId", {
-    //   id: this.$route.params.movieId,
-    //   // movie/tt12345 ==>
-    //   //movieId = tt12345 ==>
-    //   //id = tt12345
-    // });
-    this.searchMovieWithId({
+    this.$store.dispatch("movie/searchMovieWithId", {
       id: this.$route.params.movieId,
-    })
+      // movie/tt12345 ==>
+      //movieId = tt12345 ==>
+      //id = tt12345
+    });
   },
   components: {
     Loader,
   },
   computed: {
-    ...mapState('movie',[
-      'theMovie',
-      'loading'
-    ])
+    theMovie() {
+      return this.$store.state.movie.theMovie;
+    },
+    loading() {
+      return this.$store.state.movie.loading;
+    },
   },
   methods: {
-    ...mapActions('movie', [
-      'searchMovieWithId'
-    ]),
     requestDiffSizeImage(url, size = 700){
       if(!url || url ==='N/A' ){
         this.imageLoading = false
@@ -132,6 +127,9 @@ export default {
 
 
 <style lang="scss" scoped>
+@use "sass:math";
+@import "~/scss/main";
+
 .container {
   padding-top: 40px;
 }
@@ -140,7 +138,7 @@ export default {
   display: flex;
   .poster {
     width: 500px;
-    height: 500px * 3, 2;
+    height: math.div(500px * 3, 2);
     margin-right: 70px;
     flex-shrink: 0;
     // 감소너비를 사용하지않음.
@@ -181,7 +179,7 @@ export default {
     position: relative;
     flex-shrink: 0;
     width: 500px;
-    height: 500px * 3, 2;
+    height: math.div(500px * 3, 2);
     margin-right: 70px;
     border-radius: 10px;
     background-color: $gray-200;

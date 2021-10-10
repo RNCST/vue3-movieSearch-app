@@ -40,8 +40,6 @@
 
 <script>
 import Logo from '~/components/Logo'
-import {mapState} from 'vuex'
-
 export default {
   components: {
     Logo
@@ -66,10 +64,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('about',[
-      'image',
-      'name'
-    ])
+    image() {
+      return this.$store.state.about.image
+    },
+    name() {
+      return this.$store.state.about.name
+    }
   },
   methods: {
     isMatch(path) {
@@ -86,6 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/scss/main";
 
 header{
   position: relative;
