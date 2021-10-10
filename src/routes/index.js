@@ -7,6 +7,11 @@ import NotFound from './NotFound'
 
 export default createRouter({
   history: createWebHashHistory(),
+  scrollBehavior() {
+    return {
+      top:0
+    }
+  },
     //Hash모드 History 모드
     //Hash모드 => google.com/#/search
     //History모드 => Server셋팅작업이 필요함. 
