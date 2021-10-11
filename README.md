@@ -26,3 +26,7 @@
 - eslint [link](https://eslint.org/)
   - eslint-plugin-vue [link](https://eslint.vuejs.org/user-guide/)
 
+- axios [link](https://axios-http.com/docs/intro)
+- lodash [link](https://lodash.com/)
+- dotenv-webpack [link](https://github.com/mrsteele/dotenv-webpack)
+- netlify-cli [link](https://docs.netlify.com/cli/get-started/)
