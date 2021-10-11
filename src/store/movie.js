@@ -64,7 +64,7 @@ export default {
             })
           }
         }
-      } catch (message) {
+      } catch ({message}) {
         commit('updateState', {
           movies: [],
           message: message
@@ -106,24 +106,7 @@ export default {
   // 무조건 비동기로 동작을 한다. 
   // 바로 state를 가져올수 없고 context를 통해 접근하거나 {state}처럼 객체 그자체로 인수를 넣어접근해줄수있다.
 }
-function _fetchMovie(payload) {
-  const { title, type, year, page, id } = payload
-  const OMDB_API_KEY = '7035c60c';
-  const url = id
-    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
-    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-  // const url = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}`
-
-  return new Promise((resolve, reject) => {
-    axios.get(url)
-      .then((res) => {
-        if (res.data.Error) {
-          reject(res.data.Error)
-        }
-        resolve(res)
-      })
-      .catch((err) => {
-        reject(err.message)
-      })
-  })
+async function _fetchMovie(payload) {
+ return await axios.post('/.netlify/functions/movie/',payload)
+//  post는 쿼리스트링을 직접적는것이 아닌 body라는 속성에 담아서 넘긴다.
 }
