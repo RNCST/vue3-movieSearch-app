@@ -1,2 +1,12 @@
-[functions]
-  directory = "net_functions"
+[build]
+  command = "npm run build"
+  functions = "net_functions"  # Netlify serverless function derectory
+  publish = "dist" 
+
+[dev]
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 8080 #프로젝트 개발 서버의 포트
+  port = 8888 # 출력할 netlify의 포트
+  publish = "dist"
+  autoLaunch = false #Netlify server가 준비되면 자동으로 브라우저를 오픈하는지
