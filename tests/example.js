@@ -1,3 +1,7 @@
-export function double(num){
-  return num*2
+export function asyncFn() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('Done!')
+    }, 500)
+  })
 }
