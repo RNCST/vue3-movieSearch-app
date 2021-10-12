@@ -1,7 +1,7 @@
 module.export ={
   // nodejs 환경에서 돌아간다.
 
-  moduleFileExtension: [
+  moduleFileExtensions: [
     'js',
     'vue'
   ],
