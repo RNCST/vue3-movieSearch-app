@@ -2,7 +2,9 @@
 module.exports = {
   env: {
     browser: true,
-    node: true
+    node: true,
+    jest: true
+    // jest test환경에서 lint error를 제외
   },
   //code 검사는 browser nodejs 환경에서 모두 하도록
   extends: [
