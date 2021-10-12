@@ -1,42 +1,30 @@
-import { asyncFn} from './example'
+// import * as example from './example'
 
 // describe('async test', () => {
-//   test('done', () => {
-//     asyncFn().then(res => {
-//       expect(res).toBe('Done?')
-//     })
-//   })
+//   test('async/aswait', async () => {
+//     jest.spyOn(example, 'fetchMovieTitle').mockResolvedValue('Done!') 
+//     // 시간절약, 모의함수로 로 결과값을 유도
+//     const res = await example.fetchMovieTitle()
+//     expect(res).toBe('Done!')
+//   }, 7000)
 // })
-// 비동기 테스트내에서 실제로는 fail이 떠야하는데 true가 뜬다. 
-// test라는 함수내부에 비동기 패턴이 들어있는지 아닌지를 판단할 수 없다.
 
+import axios from 'axios'
+import { fetchMovieTitle } from './example'
 
-describe('async test2', () => {
-  test('done', (done) => {
-    asyncFn().then(res => {
-      expect(res).toBe('Done!')
-      done() // 비동기 테스트
+describe('movie', () => {
+  test('movie title change', async () => {
+    axios.get = jest.fn(() => {
+      return new Promise(resolve => {
+        resolve({
+          data: {
+            Title: 'Frozen II'
+          }
+        })
+      })
     })
+    // 네트워크에러(외부요인)과는 상관없이 로직테스트를 위해 axios로 가져오는 결과값을 모의로만들어준다.
+    const title = await fetchMovieTitle()
+    expect(title).toBe('Frozen ii')
   })
-  
-  test('then', () => {
-    return asyncFn().then(res => { //return을 이용
-      expect(res).toBe('Done!')
-    })
-  })
-
-  test('resolves',() => expect(asyncFn()).resolves.toBe('Done!')) //코드 단순화를위한 resolves.(return 생략)
-
-  test('async/aswait',async()=> {
-    const res = await asyncFn()
-    expect(res).toBe('Done?')
-  })
-  
-
-  test('async/aswait-long',async()=> {
-    const res = await asyncFn()
-    expect(res).toBe('Done?')
-  }, 7000)
-
-  // test라는함수는 5초까지만 기다릴 수 있는데 세번째 인수로 시간을 더 늘려줄 수 있다.
 })
