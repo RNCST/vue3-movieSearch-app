@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     isMatch(path) {
-      // console.log(this.$route);
+      console.log(this.$route);
       // console.log('path',path);
       if(!path) return false
       else return path.test(this.$route.fullPath)
